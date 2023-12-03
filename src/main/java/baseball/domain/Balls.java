@@ -2,17 +2,28 @@ package baseball.domain;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class Balls {
     private static final int BALL_LENGTH = 3;
-    private static final int MIN_BALL = 1;
-    private static final int MAX_BALL = 9;
 
     private List<Ball> balls;
 
     public Balls(List<Ball> balls) {
         validate(balls);
         this.balls = balls;
+    }
+
+    public int countSameBallWithSameOrder(Balls target) {
+        return (int) IntStream.range(0, BALL_LENGTH)
+                .filter(i -> this.balls.get(i).equals(target.balls.get(i)))
+                .count();
+    }
+
+    public int countSameBall(Balls target) {
+        return (int) balls.stream()
+                .filter(ball -> target.balls.contains(ball))
+                .count();
     }
 
     private void validate(List<Ball> balls) {
