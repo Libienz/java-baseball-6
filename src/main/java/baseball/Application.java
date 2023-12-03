@@ -1,7 +1,10 @@
 package baseball;
 
+import baseball.config.BaseBallGameConfig;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        BaseBallGameConfig baseBallGameConfig = new BaseBallGameConfig();
+        baseBallGameConfig.mainController().run();
     }
 }
