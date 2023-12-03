@@ -26,18 +26,20 @@ public class MainController {
 
         while (continueMode == ContinueMode.CONTINUE) {
             Balls computerBalls = computerNumberController.generateComputerNumber();
-            int strikeCount = 0;
-            while (strikeCount != 3) {
-                Balls userBalls = inputView.inputBalls();
-                ScoreDto scoreDto = scoreCalculationController.calculateScore(userBalls, computerBalls);
-                outputView.printResultMessage(scoreDto);
-
-                strikeCount = scoreDto.getStrikeCount();
-
-            }
+            proceedUntillWin(computerBalls);
             outputView.printWinMessage();
             continueMode = inputView.inputContinueMode();
         }
 
+    }
+
+    private void proceedUntillWin(Balls computerBalls) {
+        int strikeCount = 0;
+        while (strikeCount != 3) {
+            Balls userBalls = inputView.inputBalls();
+            ScoreDto scoreDto = scoreCalculationController.calculateScore(userBalls, computerBalls);
+            outputView.printResultMessage(scoreDto);
+            strikeCount = scoreDto.getStrikeCount();
+        }
     }
 }
