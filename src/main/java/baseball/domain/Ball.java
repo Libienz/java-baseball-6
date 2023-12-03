@@ -6,7 +6,7 @@ public class Ball {
     private static final int MIN_BALL = 1;
     private static final int MAX_BALL = 9;
 
-    private int ball;
+    private final int ball;
 
     public Ball(int ball) {
         validate(ball);

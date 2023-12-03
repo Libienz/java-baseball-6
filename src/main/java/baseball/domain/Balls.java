@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 public class Balls {
     private static final int BALL_LENGTH = 3;
 
-    private List<Ball> balls;
+    private final List<Ball> balls;
 
     public Balls(List<Ball> balls) {
         validate(balls);
