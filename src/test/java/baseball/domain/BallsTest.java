@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("유저 추측 수 테스트")
-class UserBallsTest {
+class BallsTest {
 
     @DisplayName("중복되는 숫자가 있으면 생성 시 검증에 실패한다")
     @ParameterizedTest
