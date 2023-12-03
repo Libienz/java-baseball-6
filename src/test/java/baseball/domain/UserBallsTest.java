@@ -18,23 +18,18 @@ class UserBallsTest {
     @ParameterizedTest
     @MethodSource("nonUniqueUserBall")
     void testValidationFailWithNonUniqueNumbers(List<Integer> numbers) {
-        assertThatThrownBy(() -> new UserBalls(numbers))
+        List<Ball> balls = numbers.stream().map(Ball::new).toList();
+        assertThatThrownBy(() -> new Balls(balls))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("범위에 벗어나는 숫자가 있으면 생성 시 검증에 실패한다")
-    @ParameterizedTest
-    @MethodSource("invalidRangeBalls")
-    void testValidationFailWithInvalidRangeNumber(List<Integer> numbers) {
-        assertThatThrownBy(() -> new UserBalls(numbers))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
 
     @DisplayName("길이가 맞지 않으면 생성 시 검증에 실패한다")
     @ParameterizedTest
     @MethodSource("invalidLengthBalls")
     void testValidationFailWithInvalidLength(List<Integer> numbers) {
-        assertThatThrownBy(() -> new UserBalls(numbers))
+        List<Ball> balls = numbers.stream().map(Ball::new).toList();
+        assertThatThrownBy(() -> new Balls(balls))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -42,7 +37,8 @@ class UserBallsTest {
     @ParameterizedTest
     @MethodSource("validBalls")
     void testValidationWithValidBalls(List<Integer> numbers) {
-        assertThatNoException().isThrownBy(() -> new UserBalls(numbers));
+        List<Ball> balls = numbers.stream().map(Ball::new).toList();
+        assertThatNoException().isThrownBy(() -> new Balls(balls));
     }
 
 
@@ -52,15 +48,6 @@ class UserBallsTest {
                 Arguments.of(List.of(1, 1, 1)),
                 Arguments.of(List.of(3, 3, 3)),
                 Arguments.of(List.of(4, 5, 5))
-        );
-    }
-
-    static Stream<Arguments> invalidRangeBalls() throws Throwable {
-        return Stream.of(
-                Arguments.of(List.of(-1, 1, 2)),
-                Arguments.of(List.of(1, 2, 10)),
-                Arguments.of(List.of(0, 1, 11)),
-                Arguments.of(List.of(0, 5, 11))
         );
     }
 
@@ -81,6 +68,4 @@ class UserBallsTest {
                 Arguments.of(List.of(1, 5, 9))
         );
     }
-
-
 }
