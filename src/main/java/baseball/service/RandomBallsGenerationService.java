@@ -1,10 +1,8 @@
 package baseball.service;
 
-import baseball.domain.Ball;
 import baseball.domain.Balls;
 
-import java.util.List;
-import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class RandomBallsGenerationService {
     private static final int LENGTH = 3;
@@ -16,9 +14,11 @@ public class RandomBallsGenerationService {
     }
 
     public Balls generateBalls() {
-        List<Ball> balls = IntStream.range(0, 3)
-                .mapToObj(i -> randomBallGenerationService.generateBall())
-                .toList();
-        return new Balls(balls);
+
+        return new Balls(Stream.generate(randomBallGenerationService::generateBall)
+                .distinct()
+                .limit(LENGTH)
+                .toList());
     }
+
 }
